@@ -110,7 +110,7 @@ def main():
     running_loss = 0.0
     running_tar_loss = 0.0
     ite_num4val = 0
-    save_frq = 2000  # save the model every 2000 iterations
+    save_frq = 2_000  # save the model every 2000 iterations
 
     for epoch in range(0, epoch_num):
         net.train()
@@ -128,8 +128,10 @@ def main():
             if torch.cuda.is_available():
                 inputs_v, labels_v = Variable(inputs.cuda(), requires_grad=False), Variable(labels.cuda(),
                                                                                             requires_grad=False)
+                # inputs_v, labels_v = inputs.cuda(), labels.cuda()  # NEW since Torch 0.4
             else:
                 inputs_v, labels_v = Variable(inputs, requires_grad=False), Variable(labels, requires_grad=False)
+                # inputs_v, labels_v = inputs, labels
 
             # y zero the parameter gradients
             optimizer.zero_grad()
