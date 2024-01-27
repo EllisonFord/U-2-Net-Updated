@@ -55,7 +55,7 @@ data_dir = os.path.join(os.getcwd(), 'train_data' + os.sep)
 tra_image_dir = os.path.join('DUTS-TR-Image' + os.sep)
 tra_label_dir = os.path.join('DUTS-TR-Mask' + os.sep)
 
-image_ext = '.jpg'
+# image_ext = '.jpg'
 label_ext = '.png'
 
 model_dir = os.path.join(os.getcwd(), 'saved_models', model_name + os.sep)
@@ -66,7 +66,7 @@ batch_size_val = 1
 train_num = 0
 val_num = 0
 
-tra_img_name_list = glob.glob(data_dir + tra_image_dir + '*' + image_ext)
+tra_img_name_list = glob.glob(data_dir + tra_image_dir + '*' + '.jp*g')
 
 tra_lbl_name_list = []
 for img_path in tra_img_name_list:
