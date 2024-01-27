@@ -1,31 +1,23 @@
-# import os
 import torch
-# import torchvision
 from torch.autograd import Variable
 import torch.nn as nn
-# import torch.nn.functional as F
 
 from torch.utils.data import DataLoader
 from torchvision import transforms
 import torch.optim as optim
-# import torchvision.transforms as standard_transforms
 
-# import numpy as np
 import glob
 import os
 
-# from data_loader import Rescale
 from data_loader import RescaleT
 from data_loader import RandomCrop
-# from data_loader import ToTensor
 from data_loader import ToTensorLab
 from data_loader import SalObjDataset
 
 from model import U2NET
-# from model import U2NETP
+
 
 # ------- 1. define loss function --------
-
 bce_loss = nn.BCELoss(reduction='mean')
 
 
@@ -55,12 +47,11 @@ data_dir = os.path.join(os.getcwd(), 'train_data' + os.sep)
 tra_image_dir = os.path.join('DUTS-TR-Image' + os.sep)
 tra_label_dir = os.path.join('DUTS-TR-Mask' + os.sep)
 
-# image_ext = '.jpg'
 label_ext = '.png'
 
 model_dir = os.path.join(os.getcwd(), 'saved_models', model_name + os.sep)
 
-epoch_num = 100000
+epoch_num = 100_000
 batch_size_train = 12
 batch_size_val = 1
 train_num = 0
