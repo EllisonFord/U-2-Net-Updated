@@ -43,13 +43,13 @@ def muti_bce_loss_fusion(d0, d1, d2, d3, d4, d5, d6, labels_v):
 
 model_name = 'mcnet'  # 'u2netp'
 
-data_dir = os.path.join(os.getcwd(), 'train_data' + os.sep)
-tra_image_dir = os.path.join('DUTS-TR-Image' + os.sep)
-tra_label_dir = os.path.join('DUTS-TR-Mask' + os.sep)
+data_dir = os.path.join(os.getcwd(), 'train_data' + os.path.sep)
+tra_image_dir = os.path.join('DUTS-TR-Image' + os.path.sep)
+tra_label_dir = os.path.join('DUTS-TR-Mask' + os.path.sep)
 
 label_ext = '.png'
 
-model_dir = os.path.join(os.getcwd(), 'saved_models', model_name + os.sep)
+model_dir = os.path.join(os.getcwd(), 'saved_models', model_name + os.path.sep)
 
 epoch_num = 100_000
 batch_size_train = 12
@@ -61,7 +61,7 @@ tra_img_name_list = glob.glob(data_dir + tra_image_dir + '*' + '.jp*g')
 
 tra_lbl_name_list = []
 for img_path in tra_img_name_list:
-    img_name = img_path.split(os.sep)[-1]
+    img_name = img_path.split(os.path.sep)[-1]
 
     aaa = img_name.split(".")
     bbb = aaa[0:-1]
