@@ -27,11 +27,12 @@ def resize_images_in_directory(source_directory, target_directory, max_size=400)
             target_path = os.path.join(target_directory, filename)
             try:
                 resize_image(source_path, target_path, max_size)
+                print(f"Resized image for {filename} has been saved.")
             except UnidentifiedImageError:
                 print(f"Cannot identify image file: {source_path}. Skipping.")
 
 
 # Usage
-source_dir = 'AllEverFiles2/'  # Replace with your source directory path
-target_dir = 'AllEverFiles2/output'  # Replace with your target directory path
+source_dir = 'AllEverFiles3/'  # Replace with your source directory path
+target_dir = 'AllEverFiles3/resized'  # Replace with your target directory path
 resize_images_in_directory(source_dir, target_dir)

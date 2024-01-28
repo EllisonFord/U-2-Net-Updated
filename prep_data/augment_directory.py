@@ -39,8 +39,8 @@ def augment_directory(input_directory, output_directory):
 
 def main():
     # Set your input and output directories here
-    input_directory = 'AllEverFiles2/output/'
-    output_directory = 'AllEverFiles2/augmented/'
+    input_directory = 'AllEverFiles3/resized/'
+    output_directory = 'AllEverFiles3/augmented/'
 
     # Run the processing function
     augment_directory(input_directory, output_directory)
