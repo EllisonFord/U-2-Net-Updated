@@ -104,6 +104,19 @@ optimizer = optim.Adam(net.parameters(), lr=0.001, betas=(0.9, 0.999), eps=1e-08
 
 
 def main():
+    # Check for a saved checkpoint
+    checkpoint_path = model_dir + model_name + "_checkpoint.pth"
+    start_epoch = 0
+    if os.path.isfile(checkpoint_path):
+        print("=> Loading checkpoint '{}'".format(checkpoint_path))
+        checkpoint = torch.load(checkpoint_path)
+        start_epoch = checkpoint['epoch']
+        net.load_state_dict(checkpoint['model_state_dict'])
+        optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
+        print("=> Loaded checkpoint '{}' (epoch {})".format(checkpoint_path, checkpoint['epoch']))
+    else:
+        print("=> No checkpoint found at '{}'".format(checkpoint_path))
+
     # ------- 5. training process --------
     print("---start training...")
     ite_num = 0
@@ -112,7 +125,7 @@ def main():
     ite_num4val = 0
     save_frq = 2_000  # save the model every 2000 iterations
 
-    for epoch in range(0, epoch_num):
+    for epoch in range(start_epoch, epoch_num):
         net.train()
 
         for idx, data in enumerate(salobj_dataloader):
@@ -159,11 +172,17 @@ def main():
                 # Create the directory if it does not exist
                 os.makedirs(model_dir, exist_ok=True)
 
-                torch.save(net.state_dict(), model_dir + model_name + "_bce_itr_%d_train_%3f_tar_%3f.pth" % (
-                    ite_num, running_loss / ite_num4val, running_tar_loss / ite_num4val))
+                checkpoint = {
+                    'epoch': epoch,
+                    'model_state_dict': net.state_dict(),
+                    'optimizer_state_dict': optimizer.state_dict(),
+                    'loss': running_loss / ite_num4val,
+                    'tar_loss': running_tar_loss / ite_num4val
+                }
+
+                torch.save(checkpoint, model_dir + model_name + "_checkpoint.pth")
                 running_loss = 0.0
                 running_tar_loss = 0.0
-                net.train()  # resume train
                 ite_num4val = 0
 
 
