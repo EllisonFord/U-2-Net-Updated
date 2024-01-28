@@ -7,6 +7,7 @@ import torch.optim as optim
 
 import glob
 import os
+from typing import Dict
 
 from data_loader import RescaleT
 from data_loader import RandomCrop
@@ -114,7 +115,10 @@ def main():
     for epoch in range(0, epoch_num):
         net.train()
 
-        for i, data in enumerate(salobj_dataloader):
+        for idx, data in enumerate(salobj_dataloader):
+
+            data: Dict[str, torch.Tensor] = data
+
             ite_num = ite_num + 1
             ite_num4val = ite_num4val + 1
 
@@ -147,7 +151,7 @@ def main():
             del d0, d1, d2, d3, d4, d5, d6, loss2, loss
 
             print("[epoch: %3d/%3d, batch: %5d/%5d, ite: %d] train loss: %3f, tar: %3f " % (
-                epoch + 1, epoch_num, (i + 1) * batch_size_train, train_num, ite_num, running_loss / ite_num4val,
+                epoch + 1, epoch_num, (idx + 1) * batch_size_train, train_num, ite_num, running_loss / ite_num4val,
                 running_tar_loss / ite_num4val))
 
             if ite_num % save_frq == 0:
