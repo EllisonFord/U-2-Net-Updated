@@ -155,6 +155,10 @@ def main():
                 running_tar_loss / ite_num4val))
 
             if ite_num % save_frq == 0:
+
+                # Create the directory if it does not exist
+                os.makedirs(model_dir, exist_ok=True)
+
                 torch.save(net.state_dict(), model_dir + model_name + "_bce_itr_%d_train_%3f_tar_%3f.pth" % (
                     ite_num, running_loss / ite_num4val, running_tar_loss / ite_num4val))
                 running_loss = 0.0
