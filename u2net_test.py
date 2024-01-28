@@ -1,25 +1,21 @@
 import os
-from skimage import io, transform
+from skimage import io
 import torch
-import torchvision
 from torch.autograd import Variable
-import torch.nn as nn
-import torch.nn.functional as F
-from torch.utils.data import Dataset, DataLoader
-from torchvision import transforms#, utils
-# import torch.optim as optim
+from torch.utils.data import DataLoader
+from torchvision import transforms
 
 import numpy as np
 from PIL import Image
 import glob
 
 from data_loader import RescaleT
-from data_loader import ToTensor
 from data_loader import ToTensorLab
 from data_loader import SalObjDataset
 
-from model import U2NET # full size version 173.6 MB
-from model import U2NETP # small version u2net 4.7 MB
+from model import U2NET  # full size version 173.6 MB
+from model import U2NETP  # small version u2net 4.7 MB
+
 
 # normalize the predicted SOD probability map
 def normPRED(d):
@@ -29,6 +25,7 @@ def normPRED(d):
     dn = (d-mi)/(ma-mi)
 
     return dn
+
 
 def save_output(image_name,pred,d_dir):
 
@@ -51,12 +48,11 @@ def save_output(image_name,pred,d_dir):
 
     imo.save(d_dir+imidx+'.png')
 
+
 def main():
 
     # --------- 1. get image path and name ---------
-    model_name='u2net'#u2netp
-
-
+    model_name = 'u2net'  # u2netp
 
     image_dir = os.path.join(os.getcwd(), 'test_data', 'test_images')
     prediction_dir = os.path.join(os.getcwd(), 'test_data', model_name + '_results' + os.sep)
@@ -117,6 +113,7 @@ def main():
         save_output(img_name_list[i_test],pred,prediction_dir)
 
         del d1,d2,d3,d4,d5,d6,d7
+
 
 if __name__ == "__main__":
     main()
