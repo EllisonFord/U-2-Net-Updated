@@ -57,7 +57,7 @@ batch_size_val = 1
 train_num = 0
 val_num = 0
 
-tra_img_name_list = glob.glob(data_dir + tra_image_dir + '*' + '.jp*g')
+tra_img_name_list = glob.glob(data_dir + tra_image_dir + '*.jp*g')
 
 tra_lbl_name_list = []
 for img_path in tra_img_name_list:
