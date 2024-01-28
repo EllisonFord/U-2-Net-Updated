@@ -1,5 +1,4 @@
 import torch
-from torch.autograd import Variable
 import torch.nn as nn
 
 from torch.utils.data import DataLoader
@@ -126,12 +125,9 @@ def main():
 
             # wrap them in Variable
             if torch.cuda.is_available():
-                inputs_v, labels_v = Variable(inputs.cuda(), requires_grad=False), Variable(labels.cuda(),
-                                                                                            requires_grad=False)
-                # inputs_v, labels_v = inputs.cuda(), labels.cuda()  # NEW since Torch 0.4
+                inputs_v, labels_v = inputs.cuda(), labels.cuda()
             else:
-                inputs_v, labels_v = Variable(inputs, requires_grad=False), Variable(labels, requires_grad=False)
-                # inputs_v, labels_v = inputs, labels
+                inputs_v, labels_v = inputs, labels
 
             # y zero the parameter gradients
             optimizer.zero_grad()
