@@ -7,3 +7,5 @@
 test*.py
 .idea
 venv
+*.pth
+*.onnx
