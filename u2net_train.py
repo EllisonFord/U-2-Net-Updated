@@ -123,7 +123,7 @@ def main():
     running_loss = 0.0
     running_tar_loss = 0.0
     ite_num4val = 0
-    save_frq = 200  # save the model every 2000 iterations
+    save_frq = 20  # save the model every 20 iterations
 
     for epoch in range(start_epoch, epoch_num):
         net.train()
